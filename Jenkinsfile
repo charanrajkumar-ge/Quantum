@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "Building version: ${VERSION}"
+                echo "Building version: ${params.VERSION}"
             }
         }
 
@@ -22,10 +22,10 @@ pipeline {
 
         stage('Deploy') {
             when {
-                expression { DEPLOY == true }
+                expression { params.DEPLOY.toBoolean() }
             }
             steps {
-                echo "Deploying to ${ENVIRONMENT} environment..."
+                echo "Deploying to ${params.ENVIRONMENT} environment..."
             }
         }
     }
